@@ -1,0 +1,24 @@
+body {
+    font-family: Arial, sans-serif;
+    background: url('images/table.png') no-repeat center center fixed;
+    background-size: cover;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+}
+
+h1 {
+    color: goldenrod;
+}
+
+button {
+    background-color: goldenrod;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    width: 150px;
+    color: darkgreen;
+    font-weight: bold;
+    border: none;
+    
+}
