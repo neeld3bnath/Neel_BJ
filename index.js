@@ -1,14 +1,13 @@
 // Build a BlackJack Game
 
-let firstCard = 10
-let secondCard = 4
+let firstCard = null
+let secondCard = null
 let cards = [firstCard, secondCard]
 let sum = firstCard + secondCard
 let hasBlackjack = false
 let isAlive = true
 let stand = false
-let scores = []
-
+let scores = JSON.parse(localStorage.getItem("scores")) || []
 
 
 function renderGame() {
@@ -45,9 +44,21 @@ function renderGame() {
         document.getElementById("new-card").style.cursor = 'not-allowed';
     }
 
+    if (localStorage.getItem("scores")) {
+        let scoresEl = document.getElementById("scores-el")
+        scoresEl.textContent = "Scores: " + scores
+
+        let scoresAvgEl = document.getElementById("scores-avg")
+        scoresAvgEl.textContent = "Scores average: " + Math.round(scores.reduce((a, b) => a + b, 0) / scores.length, 0)
+
+        let maxEl = document.getElementById("max")
+        maxEl.textContent = "Max score: " + Math.max(...scores)
+
+        let minEl = document.getElementById("min")  
+        minEl.textContent = "Min score: " + Math.min(...scores)
+    }
+
 }
-
-
 
 function newCard() {
     let card = getRandomCard();
@@ -100,6 +111,7 @@ function renderScores(number) {
         scores.shift();
     }
     scores.push(number)
+    localStorage.setItem("scores", JSON.stringify(scores))
 
     scoresEl.textContent = "Scores: " + scores
 
@@ -112,6 +124,3 @@ function renderScores(number) {
     let minEl = document.getElementById("min")
     minEl.textContent = "Min score: " + Math.min(...scores)
 }
-
-
-document.getElementById("stand").addEventListener("click", standing);
